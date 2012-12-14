@@ -1,0 +1,6 @@
+<?php
+/** 定义提示码 */
+define('CAN_USE',1); //可以使用
+define('HAD_EXIST',2); //已经存在
+define('FORMAT_ERROR',3); //格式错误
+?>

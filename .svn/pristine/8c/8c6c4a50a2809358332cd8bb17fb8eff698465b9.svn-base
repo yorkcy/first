@@ -1,0 +1,211 @@
+<?php
+/** 路由类 */
+class Route{
+	private $smarty;
+	private $gametest; 
+	
+    /*构造函数，完成类的初始化 */
+    public function __construct($smarty,$gametest) {
+		$this->smarty = $smarty;
+		$this->gametest = $gametest;
+    }
+	
+    /**
+	 * 处理路由参数，完成对相关分组函数的调用
+	 * @access public
+	 * @param  string   $module   模块
+	 * @param  string   $action   动作
+	 */
+	public function deal ($module,$action) 
+	{
+		$module = $module ? $module : 'gametest';
+		$funcName = 'module'.ucfirst($module);
+		$this->$funcName($action);
+	}
+	
+	/**
+	 * 游戏测试模块，完成相关函数的调用
+	 * @access private
+	 * @param  string   $action   动作
+	 */
+	private function moduleGametest($action){
+		$json;
+		switch ($action) {
+			case 'checkName' :
+				echo $this->gametest->$action($_POST['value']);
+				exit;
+			case 'checkFormat' :
+				echo $this->gametest->$action($_POST['field'],$_POST['value']);
+				exit;
+			case 'add' :
+			case 'modify' :
+				$json = $this->gametest->$action($_POST['type'],$_POST['fieldArr']);
+				break;
+			case 'configInfo' :
+				$json = $this->gametest->$action($_POST['type'],$_POST['name']);
+				break;
+			case 'search' :
+				$json = $this->gametest->$action($_POST['type'],$_POST['keyword']);
+				break;
+			case 'allList' :
+				$json = $this->gametest->$action($_POST['type']);
+				break;
+			case 'delete' :
+				$json = $this->gametest->$action($_POST['type'],$_POST['nameArr']);
+				break;
+			case 'set' :
+				$clientNum = $this->gametest->getTotalNum('client');
+				$serverNum = $this->gametest->getTotalNum('server');
+				$this->smarty->assign('clientNum',$clientNum);
+				$this->smarty->assign('serverNum',$serverNum);
+				$this->smarty->assign('clientArr',$this->gametest->allList('client'));
+				$this->smarty->display('gametest/'.$action.'.tpl');
+				exit;
+			case 'main' :
+				$this->main();
+				$this->smarty->display('gametest/'.$action.'.tpl');
+				exit;
+			default :
+				if(isset($_POST['login'])){
+					$this->login();
+				}
+				$action = 'index';
+				$this->smarty->assign('clientNameArr',$this->gametest->getConfig('client//name'));
+				$this->smarty->assign('serverNameArr',$this->gametest->getConfig('server//name'));
+				$this->smarty->display('gametest/'.$action.'.tpl');
+				exit;
+		}
+		echo json_encode($json);
+	}
+	private function login(){
+		/** 重新生成sessionID */
+		session_regenerate_id();
+
+		$err['pid'] = '玩家ID有误(格式为正整数)！';
+		$err['url'] = '客户端资源有误(自定义时：注意以http://开关，/结尾)！';
+		$err['host'] = '服务端地址有误！';
+		$err['port'] = '服务端端口有误！(自定义时：最多5位正整数)';
+
+		$game_info = array(
+			'pid' => '',
+			'url' => '',
+			'host' => '',
+			'port' => '',
+			'client' => '自定义',
+			'server' => '自定义');
+		if(!empty($_REQUEST['pid']) && isNum($_REQUEST['pid']))
+		{
+			$this->smarty->assign('pid',$_REQUEST['pid']);
+			$game_info['pid'] = $_REQUEST['pid'];
+		}
+		
+		if(!empty($_REQUEST['client']))
+		{
+			$this->smarty->assign('client',$_REQUEST['client']);
+			$client = $this->gametest->getConfig('/config/client[name=\''.$_REQUEST['client'].'\']');
+			$game_info['url'] = (string)$client['0']->url;
+			$game_info['client'] = (string)$client['0']->name;
+			$game_info['debug'] = (int)$client['0']->debug;
+		}
+	
+		if(!empty($_REQUEST['server']))
+		{
+			$this->smarty->assign('server',$_REQUEST['server']);
+			$server = $this->gametest->getConfig('/config/server[name=\''.$_REQUEST['server'].'\']');
+			$game_info['host'] = (string)$server['0']->host;
+			$game_info['port'] = (string)$server['0']->port;
+			$game_info['server'] = (string)$server['0']->name;
+		}
+	
+		$this->smarty->assign('custom_url',$_REQUEST['custom_url']);
+		$this->smarty->assign('custom_host',$_REQUEST['custom_host']);
+		$this->smarty->assign('custom_port',$_REQUEST['custom_port']);
+		if(!empty($_REQUEST['custom_url']) && isUrl($_REQUEST['custom_url']))
+		{
+			$game_info['url'] = $_REQUEST['custom_url'];
+		}
+		
+		if(!empty($_REQUEST['custom_host'])&& isHost($_REQUEST['custom_host']))
+		{
+			$game_info['host'] = $_REQUEST['custom_host'];
+		}
+		
+		if(!empty($_REQUEST['custom_port']) && isNum($_REQUEST['custom_port'], 5))
+		{
+			$game_info['port'] = $_REQUEST['custom_port'];
+		}
+		
+		if(isset($_REQUEST['customDebug']))
+		{
+			$this->smarty->assign('custom_debug',$_REQUEST['customDebug']);
+			$game_info['debug'] = $_REQUEST['customDebug'];
+		}
+		foreach($game_info as $k => $v)
+		{
+			if($k == "debug")
+			{
+				continue;
+			}
+			if(empty($v))
+			{
+				$msg[] = $err[$k];
+			}	
+		}
+		if(empty($msg))
+		{
+			$_SESSION['game_info'] = $game_info;
+			$s = session_id();
+			$this->smarty->assign('openWin','Y');
+			$this->smarty->assign('ss',$s);
+		}
+		else
+		{
+			session_destroy ();
+			$this->smarty->assign('tips',$msg);
+		}
+	}
+	private function main(){
+		if(isset($_REQUEST['s']) && !empty($_REQUEST['s']))
+		{
+			session_id($_REQUEST['s']);
+		}
+		if(empty($_SESSION['game_info']))
+		{
+			echo '会话过期，请重新登录！<a href="index.php">返回</a>';
+			exit;
+		}
+		
+		$game_info = $_SESSION['game_info'];
+		
+		$now = time();
+		
+		$flex['host'] =  $game_info['host'];
+		$flex['port'] =  $game_info['port'];
+		$flex['sign'] = md5($pid . $now . rand(0,1000));
+		$flex['pid'] = $game_info['pid'];
+		$flex['time'] = $now;
+		$flex['username'] = 'test';
+		$flex['version'] = $config->version;
+		$flex['gameURL'] = "WdqkClient.swf?v" . rand(0,10000);
+		$flex['commURL'] = "CommModule.swf?v". rand(0,10000);
+		$flex['logoURL'] = "assets/ui/logo_wdqk.swf?v". rand(0,10000);
+		$flex['configURL'] = "config.json?v". rand(0,10000);
+		$flex['mapResURL'] = $game_info['url'];
+		
+		$flex['rechargeURL'] = "";
+		$flex['bbsURL'] = "";
+		$flex['orgURL'] = "";
+		$flex['newCardURL'] = "";
+		$flex['userCenterURL'] = "";
+		$flex['gmUrl'] = "";
+		
+		$flex['debug'] = $game_info['debug'] === 0 ? 0 : 1;
+		
+		$msg = "【客户端】：{$game_info['client']} {$game_info['url']} 【服务端】：{$game_info['server']} {$game_info['host']}:{$game_info['port']}";
+		$this->smarty->assign('msg',$msg);	
+		$jsonFlex = json_encode($flex);
+		$this->smarty->assign('jsonFlex',$jsonFlex);
+
+	}
+}
+?>

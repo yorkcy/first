@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config><op_time>2012-12-10 17:10:33</op_time><server><name>999</name><host>10.1.1.48</host><port>8021</port></server><client><name>ZJ</name><url>http://10.1.1.250:8000/zj_client/</url><debug>1</debug></client><server><name>p</name><host>2.2.2.2</host><port>22</port></server></config>

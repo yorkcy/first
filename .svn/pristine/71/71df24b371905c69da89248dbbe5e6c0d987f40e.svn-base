@@ -1,0 +1,13 @@
+<?php
+return array(
+	
+	/** 数据库操作提示 */
+	'XML' => array (
+		'FILENAME_EMPTY'    => '文件名为空！', 
+		'MUST_XML'       	=> '文件后缀必须为xml！', 
+		'HAS_ERROR'    		=> '文件有错误码！', 
+		'END'    			=> '处理结束！',
+		'UNKNOW_ERROR'		=> '未知错误！'
+	),
+);
+?>

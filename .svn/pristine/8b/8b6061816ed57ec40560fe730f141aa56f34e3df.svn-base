@@ -1,0 +1,87 @@
+<?php /* Smarty version Smarty-3.1.12, created on 2012-12-04 15:08:07
+         compiled from ".\templates\gametest\add.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1922550bd9bcf96d849-99008203%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '21f5e5a0edbd1b82fed58b6575f033691a10213d' => 
+    array (
+      0 => '.\\templates\\gametest\\add.tpl',
+      1 => 1354604883,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1922550bd9bcf96d849-99008203',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.12',
+  'unifunc' => 'content_50bd9bcf9c1e84_93444336',
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_50bd9bcf9c1e84_93444336')) {function content_50bd9bcf9c1e84_93444336($_smarty_tpl) {?><!DOCTYPE html>
+<html>
+<head>
+<title>游戏测试配置</title>
+<meta charset="utf-8">
+<link href="resource/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style>
+.wrap{width:800px;margin:30px auto;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>游戏测试配置</h1>
+
+    <ul id="myTab" class="nav nav-tabs">
+<li class="active">
+<a href="http://www.baidu.com">客户端<span>&nbsp;x个</span></a>
+</li>
+<li><a href="http://localhost/gametest/index.php#server">服务端<span>&nbsp;x个</span></a></li>
+</ul>
+ 
+<div class="tab-content">
+<div class="tab-pane active" id="client">
+     <form>
+    <fieldset>
+    <legend>添加客户端</legend>
+    <label>名称：</label>
+    <input type="text" placeholder="Type something…">
+    <label>地址：</label>
+    <input type="text" placeholder="Type something…">
+    <label>调试：</label>
+    <select class="span1">
+    	<option value="1">是</option>
+    	<option value="0">否</option>
+    </select><br />
+    <button type="submit" class="btn">提交</button>
+    </fieldset>
+    </form>
+  
+</div>
+<div class="tab-pane" id="server">
+    <form>
+    <fieldset>
+    <legend>添加服务端</legend>
+    <label>名称：</label>
+    <input type="text" placeholder="Type something…">
+    <label>主机：</label>
+    <input type="text" placeholder="Type something…">
+    <label>端口：</label>
+    <input type="text" placeholder="Type something…"><br />
+    <button type="submit" class="btn">提交</button>
+    </fieldset>
+    </form>
+</div>
+</div>
+</div>
+ <script src="resource/js/jq.js"></script>
+<script src="resource/js/bootstrap.min.js"></script>
+<script>
+$('#myTab a').click(function (e) {
+e.preventDefault();
+$(this).tab('show');
+})
+</script>
+</body>
+</html><?php }} ?>

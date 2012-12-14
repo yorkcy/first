@@ -1,0 +1,110 @@
+<?php /* Smarty version Smarty-3.1.12, created on 2012-11-23 15:34:18
+         compiled from ".\templates\edit.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1893950ae162b075067-32224278%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '8ac1fd24917c6a136734c45f58dfde3089b50fcf' => 
+    array (
+      0 => '.\\templates\\edit.tpl',
+      1 => 1353656055,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1893950ae162b075067-32224278',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.12',
+  'unifunc' => 'content_50ae162b0fd677_93255634',
+  'variables' => 
+  array (
+    'username' => 0,
+    'userInfo' => 0,
+    'tips' => 0,
+    'pwd_prom' => 0,
+    'rn_prom' => 0,
+    'em_prom' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_50ae162b0fd677_93255634')) {function content_50ae162b0fd677_93255634($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>修改用户-用户管理系统</title>
+<link href="./public/css/user_management.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./public/js/jq.js"></script>
+<script type="text/javascript" src="./public/js/functions.js?r=3"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#password").keyup(function (){ch_pwd(true);});
+	$("#rePassword").keyup(function (){ch_pwd(true);});
+	$("#realname").keyup(function (){ch_rn(true);});
+	$("#email").keyup(function (){ch_em(true);});
+});
+</script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <ul class="nav">
+                <li class="i_li"><a href="index.php"><b>主界面</b></a></li>
+                <li class="i_li"><a href="index.php?action=add">增加用户</a></li>
+                <li class="flo-clr"></li>
+            </ul>
+            <div class="umsg">
+               欢迎你，<?php echo $_smarty_tpl->tpl_vars['username']->value;?>
+，<a href="index.php?action=logout">退出</a>
+            </div>
+            <div class="flo-clr"></div>
+        </div>
+        <div class="main">
+            <p>修改用户->用户名：<?php echo $_smarty_tpl->tpl_vars['userInfo']->value['username'];?>
+</p>
+        <p style="color:red;"><?php echo $_smarty_tpl->tpl_vars['tips']->value;?>
+</p>
+            <form method="post" action="index.php?action=edit&uid=<?php echo $_smarty_tpl->tpl_vars['userInfo']->value['id'];?>
+" class="form_com">
+                <fieldset>
+                <legend>修改密码</legend>
+                    <p><label for="password">密码：</label><input type="password" id="password" name="value1" />&nbsp;<span id="prom_password"><?php echo $_smarty_tpl->tpl_vars['pwd_prom']->value;?>
+</span></p>
+                    <p><label for="re_password">重复密码：</label><input type="password" id="rePassword" name="value2" /></p>
+                    <input type="hidden" name="field" value="password">
+                    <input type="hidden" name="uid" value="<?php echo $_smarty_tpl->tpl_vars['userInfo']->value['id'];?>
+">
+                    <p><input name="post_edit" type="submit" value="提交" class="btn" id="edit_pwd_sub" disabled="disabled" /></p>
+                </fieldset>
+            </form>
+            <form method="post" action="index.php?action=edit&uid=<?php echo $_smarty_tpl->tpl_vars['userInfo']->value['id'];?>
+" class="form_com pt16">
+                <fieldset>
+                <legend>修改姓名</legend>
+                    <p><label for="realname">姓名：</label><input value="<?php echo $_smarty_tpl->tpl_vars['userInfo']->value['realname'];?>
+" type="text" id="realname" name="value1" />&nbsp;<span id="prom_realname"><?php echo $_smarty_tpl->tpl_vars['rn_prom']->value;?>
+</span></p>
+                    <input type="hidden" name="field" value="realname">
+                    <input type="hidden" name="uid" value="<?php echo $_smarty_tpl->tpl_vars['userInfo']->value['id'];?>
+">
+                    <p><input name="post_edit" type="submit" value="提交" class="btn" id="edit_rn_sub" disabled="disabled" /></p>
+                </fieldset>
+            </form>
+            <form method="post" action="index.php?action=edit&uid=<?php echo $_smarty_tpl->tpl_vars['userInfo']->value['id'];?>
+" class="form_com pt16">
+                <fieldset>
+                <legend>修改邮箱</legend>
+                    <p><label for="email">邮箱：</label><input value="<?php echo $_smarty_tpl->tpl_vars['userInfo']->value['email'];?>
+" type="text" id="email" name="value1" />&nbsp;<span id="prom_email"><?php echo $_smarty_tpl->tpl_vars['em_prom']->value;?>
+</span></p>
+                    <input type="hidden" name="field" value="email">
+                    <input type="hidden" name="uid" value="<?php echo $_smarty_tpl->tpl_vars['userInfo']->value['id'];?>
+">
+                    <p><input name="post_edit" type="submit" value="提交" class="btn" id="edit_em_sub" disabled="disabled" /></p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<?php }} ?>

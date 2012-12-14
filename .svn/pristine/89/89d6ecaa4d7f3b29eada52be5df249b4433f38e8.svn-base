@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config><op_time>2012-12-13 11:38:30</op_time><version>1</version><server><name>主干服务端</name><host>10.1.1.177</host><port>8021</port><order>8</order></server><client><name>主干客户端</name><order>101</order><url>http://10.1.1.177:8000/test_trunk/</url><debug>1</debug></client><client><name>分支客户端</name><order>102</order><url>http://10.1.1.177:8000/test_branch/</url><debug>0</debug></client><server><name>分支服务端</name><order>9</order><host>10.1.1.177</host><port>9021</port></server></config>

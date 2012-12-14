@@ -1,0 +1,141 @@
+<?php /* Smarty version Smarty-3.1.12, created on 2012-12-10 17:22:36
+         compiled from ".\templates\gametest\index.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:2533350bd6e95add080-72331541%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '477ef3655634ef6456dea3c3d27d19f24aba43b7' => 
+    array (
+      0 => '.\\templates\\gametest\\index.tpl',
+      1 => 1355131354,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '2533350bd6e95add080-72331541',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.12',
+  'unifunc' => 'content_50bd6e95b2d1b8_72156963',
+  'variables' => 
+  array (
+    'tips' => 0,
+    'msg' => 0,
+    'pid' => 0,
+    'clientNameArr' => 0,
+    'configItem' => 0,
+    'client' => 0,
+    'serverNameArr' => 0,
+    'server' => 0,
+    'custom_url' => 0,
+    'custom_debug' => 0,
+    'custom_host' => 0,
+    'custom_port' => 0,
+    'openWin' => 0,
+    'ss' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_50bd6e95b2d1b8_72156963')) {function content_50bd6e95b2d1b8_72156963($_smarty_tpl) {?><!DOCTYPE html>
+<html>
+<head>
+<title>游戏测试配置</title>
+<meta charset="utf-8">
+<link href="resource/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style>
+.wrap{width:800px;margin:30px auto;}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-pills">
+        <li class="active"><a href="index.php">主页</a></li>
+        <li><a href="index.php?module=gametest&action=set">设置</a></li>
+    </ul>
+    <h1>游戏测试入口</h1>
+    <?php  $_smarty_tpl->tpl_vars['msg'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['msg']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['tips']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['msg']->key => $_smarty_tpl->tpl_vars['msg']->value){
+$_smarty_tpl->tpl_vars['msg']->_loop = true;
+?>
+   		 <div style="color:red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
+</div>
+    <?php } ?>
+    <form class="form-horizontal" method="post" action="index.php">
+        <table class="table table-bordered">
+            <tbody id="clientList">
+                 <tr><td >玩家ID</td><td><input type="text" name="pid" value="<?php echo $_smarty_tpl->tpl_vars['pid']->value;?>
+"></td></tr>
+                        <tr>
+                             <td>客户端</td>
+                             <td><?php  $_smarty_tpl->tpl_vars['configItem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['configItem']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['clientNameArr']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['configItem']->key => $_smarty_tpl->tpl_vars['configItem']->value){
+$_smarty_tpl->tpl_vars['configItem']->_loop = true;
+?><label class="radio inline"><input type="radio" name="client" value="<?php echo $_smarty_tpl->tpl_vars['configItem']->value;?>
+" <?php if ($_smarty_tpl->tpl_vars['configItem']->value==$_smarty_tpl->tpl_vars['client']->value){?>checked<?php }?> ><?php echo $_smarty_tpl->tpl_vars['configItem']->value;?>
+</label><?php } ?></td>
+                        </tr>
+                        <tr>
+                             <td>服务端</td>
+                             <td><?php  $_smarty_tpl->tpl_vars['configItem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['configItem']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['serverNameArr']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['configItem']->key => $_smarty_tpl->tpl_vars['configItem']->value){
+$_smarty_tpl->tpl_vars['configItem']->_loop = true;
+?><label class="radio inline"><input type="radio" name="server" value="<?php echo $_smarty_tpl->tpl_vars['configItem']->value;?>
+" <?php if ($_smarty_tpl->tpl_vars['configItem']->value==$_smarty_tpl->tpl_vars['server']->value){?>checked<?php }?> ><?php echo $_smarty_tpl->tpl_vars['configItem']->value;?>
+</label><?php } ?></td>
+                        </tr>
+                        <tr>
+                             <td>自定义</td>
+                             <td>
+                             <div class="control-group">
+<label class="control-label" for="custom_url">客户端资源地址</label>
+<div class="controls">
+<input type="text" name="custom_url" id="custom_url" value="<?php echo $_smarty_tpl->tpl_vars['custom_url']->value;?>
+">
+<span class="help-inline">如：http://10.1.1.250/client/</span>
+</div>
+</div>
+ <div class="control-group">
+                <label class="control-label">版本类型</label>
+                <div class="controls">
+                <label class="radio inline"><input type="radio" name="customDebug" value="1" <?php if ($_smarty_tpl->tpl_vars['custom_debug']->value=='1'){?>checked<?php }?> >Debug版</label>
+<label class="radio inline"><input type="radio" name="customDebug" value="0" <?php if ($_smarty_tpl->tpl_vars['custom_debug']->value=='0'){?>checked<?php }?> >Release版</label>
+                </div>
+                </div>
+<div class="control-group">
+<label class="control-label" for="custom_host">服务端地址</label>
+<div class="controls">
+<input type="text" name="custom_host" id="custom_host" value="<?php echo $_smarty_tpl->tpl_vars['custom_host']->value;?>
+">
+<span class="help-inline">如：10.1.1.250或www.leyou.com</span>
+</div>
+</div>
+<div>
+<label class="control-label" for="custom_port">服务端端口</label>
+<div class="controls">
+<input type="text" name="custom_port" id="custom_port" value="<?php echo $_smarty_tpl->tpl_vars['custom_port']->value;?>
+">
+<span class="help-inline">如：8120</span>
+</div>
+</div>
+</td>
+                        </tr>
+                        <tr>
+                             <td></td>
+                             <td><button name="login" class="btn btn-primary" type="submit">登录</button>
+                             <button class="btn" type="reset">重置</button></td>
+                        </tr>
+                </tbody>
+            </table>
+	</form>
+    
+</div>
+ <script src="resource/js/jquery.js"></script>
+<script src="resource/js/bootstrap.min.js"></script>
+<script src="resource/js/gametest.js"></script>
+<?php if ($_smarty_tpl->tpl_vars['openWin']->value=='Y'){?><script>window.open('index.php?action=main&s=<?php echo $_smarty_tpl->tpl_vars['ss']->value;?>
+','_blank');</script><?php }?>
+</body>
+</html><?php }} ?>

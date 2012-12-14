@@ -1,0 +1,230 @@
+<?php /* Smarty version Smarty-3.1.12, created on 2012-12-04 11:27:35
+         compiled from ".\templates\admin\index.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:135050b0599a30cd76-92660868%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'dd8080d42b32facc0cba48e325582f191faab8ba' => 
+    array (
+      0 => '.\\templates\\admin\\index.tpl',
+      1 => 1354591633,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '135050b0599a30cd76-92660868',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.12',
+  'unifunc' => 'content_50b0599a3e7782_44208065',
+  'variables' => 
+  array (
+    'username' => 0,
+    'keyword' => 0,
+    'r_uri' => 0,
+    'tips_del' => 0,
+    'user_list' => 0,
+    'x' => 0,
+    'delRst' => 0,
+    'uid' => 0,
+    'rst' => 0,
+    'userListTips' => 0,
+    'htmlPage' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_50b0599a3e7782_44208065')) {function content_50b0599a3e7782_44208065($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>主界面-用户管理系统</title>
+<link href="./resource/css/user_management.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <ul class="nav">
+             	<li class="i_li"><a href="index.php"><b>主界面</b></a></li>
+                <li class="i_li"><a href="index.php?group=admin&module=user&action=add">增加用户</a></li>
+                <li class="flo-clr"></li>
+            </ul>
+            <div class="umsg">
+                欢迎你，<?php echo $_smarty_tpl->tpl_vars['username']->value;?>
+，<a href="index.php?group=admin&module=user&action=logout">退出</a>
+            </div>
+            <div class="flo-clr"></div>
+        </div>
+    <div class="main">
+        <div class="search">
+            <form method="get" action="index.php" id="searchForm">
+            <input type="hidden" name="group" value="admin" />
+            <input type="hidden" name="module" value="user" />
+           	 <input type="hidden" name="action" value="search" />
+                <p><label for="searchKeyword">查找用户：</label><input value="<?php echo $_smarty_tpl->tpl_vars['keyword']->value;?>
+" type="text" id="searchKeyword" name="keyword" />&nbsp;<input onclick="isNull('searchKeyword');" type="button" value="提交" />&nbsp;根据用户名查找</p>
+            </form>
+        </div>
+        <div class="upload">
+        	<form action="index.php?group=admin&module=xml&action=import" method="post"
+enctype="multipart/form-data">
+<p><label for="xmlFile">导入数据:</label>
+<input type="file" name="xmlFile" id="file" />&nbsp;<input type="submit" name="submit" value="上传" /></p>
+</form>
+        </div>
+        <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['r_uri']->value;?>
+" id="user_lform">
+            <table class="user_list">
+                <caption style="text-align:left;">用户列表：</caption>
+                <p><?php echo $_smarty_tpl->tpl_vars['tips_del']->value;?>
+</p>
+                <tr>
+                     <th width="60">选择<input type="checkbox" id="btnInvert" /></th>
+                    <th width="65">用户ID</th>
+                     <th width="65">用户名</th>
+                      <th width="88">姓名</th>
+                      <th width="105">邮箱</th>
+                      <th width="160">注册时间</th>
+                  <th width="55">操作</th>
+                 </tr>
+                <?php  $_smarty_tpl->tpl_vars['x'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['x']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['user_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['x']->key => $_smarty_tpl->tpl_vars['x']->value){
+$_smarty_tpl->tpl_vars['x']->_loop = true;
+?>
+                     <tr>
+                     <td class="c_check"><input onclick="setSelectedUidArr(this)" type="checkbox" name="uidArr[]" class="uidArr" value="<?php echo $_smarty_tpl->tpl_vars['x']->value['id'];?>
+" /></td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['x']->value['id'];?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['x']->value['username'];?>
+</td>
+                     <td><?php echo $_smarty_tpl->tpl_vars['x']->value['realname'];?>
+</td>
+                     <td><?php echo $_smarty_tpl->tpl_vars['x']->value['email'];?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['x']->value['ctime'];?>
+</td>
+                    <td><a href="index.php?group=admin&module=user&action=edit&uid=<?php echo $_smarty_tpl->tpl_vars['x']->value['id'];?>
+">修改</a></td>
+                    </tr>
+                 <?php } ?>
+            </table>
+            <p style="color:red"><?php  $_smarty_tpl->tpl_vars['rst'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['rst']->_loop = false;
+ $_smarty_tpl->tpl_vars['uid'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['delRst']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['rst']->key => $_smarty_tpl->tpl_vars['rst']->value){
+$_smarty_tpl->tpl_vars['rst']->_loop = true;
+ $_smarty_tpl->tpl_vars['uid']->value = $_smarty_tpl->tpl_vars['rst']->key;
+?>
+                    ID为<?php echo $_smarty_tpl->tpl_vars['uid']->value;?>
+用户<?php if ($_smarty_tpl->tpl_vars['rst']->value=="1"){?>删除成功！<?php }else{ ?>删除失败！<?php }?><br>
+        <?php } ?><?php echo $_smarty_tpl->tpl_vars['userListTips']->value;?>
+</p>
+        <p>在查找后进行导出全部是指在当前查找条件下的全部用户</p>
+            <p style="color:red;padding-left:16px;"><input name="delete" type="hidden" value="y" /><input type="button" value="删除选中" onclick="is_del();"/>&nbsp;<input type="button" value="删除全部" onclick="is_del(true);"/>&nbsp;<input name="delete" type="hidden" value="y" /><input type="button" value="全部取消" onclick="selectAllCancel();"/>&nbsp;<input name="delete" type="hidden" value="y" /><input type="button" value="导出选中" onclick="selectedUserInfoXml();"/>&nbsp;<input name="delete" type="hidden" value="y" /><input type="button" value="导出全部" onclick="allUserInfoXml();"/></p>
+            </form>
+            <p style="color:red;text-align:center;"><?php echo $_smarty_tpl->tpl_vars['htmlPage']->value;?>
+</p>
+        </div>
+    </div>
+<script type="text/javascript" src="./resource/js/jq.js"></script>
+<script type="text/javascript">
+var un_ok=false,pwd_ok=false,rn_ok=false,em_ok=false;
+  
+function is_del(type)
+{
+	if(type){
+		var rst= window.confirm("单击'确定'继续。单击'取消'停止。");
+		
+		if (rst) {
+				$.post("index.php?group=admin&module=user&action=deleteAll",{setSelectedUidArrNull:true},function(result){
+				alert("删除成功！");
+				location.reload();
+		});
+		}
+	}
+	var i=0;
+	 $(".c_check input:checkbox").each(function () {  
+            if($(this).attr("checked")){i++;} 
+});
+	if(i>0){
+		var rst= window.confirm("单击'确定'继续。单击'取消'停止。");
+		
+		if (rst) {
+			
+				$("#user_lform").submit();
+		}
+	}else{
+		alert("请先选择！"); 
+		}
+}
+
+function isNull(target)
+{
+	var keyword=document.getElementById(target).value;
+	if(keyword==""){
+		alert("查找内容不能为空！");
+	}else{
+		$.post("index.php?group=admin&module=xml&action=setSelectedUidArr",{setSelectedUidArrNull:true},function(result){
+			document.getElementById("searchForm").submit();
+		});
+	}
+}
+$("#btnInvert").click(function () {  
+
+	arr={'setSelectedUidArr':{'add':{},'del':{}}};
+	var i=0;
+	$(".c_check input:checkbox").each(function () {  
+		this.checked = !this.checked;  
+		if (this.checked) 
+		{
+			arr['setSelectedUidArr']['add'][i]=this.value;
+		}else{
+			arr['setSelectedUidArr']['del'][i]=this.value;
+		}
+		i++;
+	});
+	
+	$.post("index.php?group=admin&module=xml&action=setSelectedUidArr",arr,function(result){
+    });
+});
+function selectedUserInfoXml(){
+	window.location.href="index.php?group=admin&module=xml&action=export&type=selected";
+}
+function selectAllCancel(){
+	$.post("index.php?group=admin&module=xml&action=selectAllCancel",{},function(result){
+		location.reload();
+    });
+}
+function allUserInfoXml(){
+	window.location.href="index.php?group=admin&module=xml&action=export&type=all&keyword=<?php echo $_smarty_tpl->tpl_vars['keyword']->value;?>
+";
+}
+function setSelectedUidArr(t){
+	 if(t.checked==true){
+$.post("index.php?group=admin&module=xml&action=setSelectedUidArr",{setSelectedUidArr:{add:{0:t.value}}},function(result){
+		//alert(result);
+    });          
+	    
+ }else{ 
+	    $.post("index.php?group=admin&module=xml&action=setSelectedUidArr",{setSelectedUidArr:{del:{0:t.value}}},function(result){
+		//alert(result);
+    });
+	 }
+}
+$.post("index.php?group=admin&module=xml&action=getSelectedUidArr",{},function(result){
+	arr = eval('(' + result + ')');
+	for(key in arr){
+		$('input[type="checkbox"][name="uidArr[]"]').each(
+                function() {
+                      if($(this).attr("value")==arr[key]){
+						  $(this).attr("checked",true); 
+					}
+                }
+            );
+		}
+});
+</script>
+</body>
+</html>
+<?php }} ?>

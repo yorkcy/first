@@ -1,0 +1,84 @@
+<?php /* Smarty version Smarty-3.1.12, created on 2012-11-28 19:47:29
+         compiled from ".\templates\admin\add.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:2360450b059b67995b0-80073642%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'c23128a45d0d68f5fa948c806ec2c03ea553b32f' => 
+    array (
+      0 => '.\\templates\\admin\\add.tpl',
+      1 => 1354103234,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '2360450b059b67995b0-80073642',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.12',
+  'unifunc' => 'content_50b059b6819980_03449817',
+  'variables' => 
+  array (
+    'username' => 0,
+    'tips' => 0,
+    'add_username' => 0,
+    'add_password' => 0,
+    'add_re_password' => 0,
+    'add_realname' => 0,
+    'add_email' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_50b059b6819980_03449817')) {function content_50b059b6819980_03449817($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>增加用户-用户管理系统</title>
+<link href="./public/css/user_management.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./public/js/jq.js"></script>
+<script type="text/javascript" src="./public/js/functions.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#username").keyup(checkUsername);
+	$("#password").keyup(function (){checkPassword(false);});
+	$("#rePassword").keyup(function (){checkPassword(false);});
+	$("#realname").keyup(function (){checkRealname(false);});
+	$("#email").keyup(function (){checkEmail(false);});
+});
+</script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+        <ul class="nav">
+            <li class="i_li"><a href="index.php">主界面</a></li>
+            <li class="i_li"><a href="index.php?group=admin&module=user&action=add"><b>增加用户</b></a></li>
+            <li class="flo-clr"></li>
+        </ul>
+        <div class="umsg">
+           欢迎你，<?php echo $_smarty_tpl->tpl_vars['username']->value;?>
+，<a href="index.php?group=admin&module=user&action=logout">退出</a>
+        </div>
+        <div class="flo-clr"></div>
+        </div>
+        <div class="main">
+            <p style="color:red;"><?php echo $_smarty_tpl->tpl_vars['tips']->value;?>
+</p>
+            <form method="post" action="index.php?group=admin&module=user&action=add" class="form_com">
+                <p><label for="username">用户名：</label><input value="<?php echo $_smarty_tpl->tpl_vars['add_username']->value;?>
+" type="text" id="username" name="username" />&nbsp;<span id="prom_username"></span></p>
+                <p><label for="password">密码：</label><input value="<?php echo $_smarty_tpl->tpl_vars['add_password']->value;?>
+" type="password" id="password" name="password" />&nbsp;<span id="prom_password"></span></p>
+                <p><label for="rePassword">重复密码：</label><input value="<?php echo $_smarty_tpl->tpl_vars['add_re_password']->value;?>
+" type="password" id="rePassword" name="rePassword" /></p>
+                <p><label for="realname">姓名：</label><input type="text" value="<?php echo $_smarty_tpl->tpl_vars['add_realname']->value;?>
+" id="realname" name="realname" />&nbsp;<span id="prom_realname"></span></p>
+                <p><label for="email">邮箱：</label><input value="<?php echo $_smarty_tpl->tpl_vars['add_email']->value;?>
+" type="text" id="email" name="email" />&nbsp;<span id="prom_email"></span></p>
+                <p><input name="add" type="submit" value="提交" class="btn"  id="add_sub" disabled="disabled" /></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<?php }} ?>
