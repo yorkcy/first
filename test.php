@@ -1,4 +1,4 @@
 <?php
 $arr = array();
-echo json_encode($arr);/////
+echo json_encode($arr);
 ?>
